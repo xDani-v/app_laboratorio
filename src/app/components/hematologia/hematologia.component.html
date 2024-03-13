@@ -1,0 +1,86 @@
+<form (ngSubmit)="submit()" class="p-5">
+    <h2>Hematologia</h2>
+    <div class="form-group row">
+        <div class="col">
+            <label for="hematocrito" class="form-label">Hematocrito:</label>
+            <input type="number" id="hematocrito" name="hematocrito" class="form-control"
+                [(ngModel)]="hematologia.hematocrito">
+            <label class="form-label">Referencia: {{hematologia.hematocrito_ref?.min+ '-'+
+                hematologia.hematocrito_ref?.max}}</label>
+        </div>
+
+        <div class="col">
+            <label for="hemoglobina" class="form-label">Hemoglobina:</label>
+            <input type="number" id="hemoglobina" name="hemoglobina" class="form-control"
+                [(ngModel)]="hematologia.hemoglobina">
+            <label class="form-label">Referencia: {{hematologia.hemoglobina_ref?.min+ '-'+
+                hematologia.hemoglobina_ref?.max}}</label>
+        </div>
+
+        <div class="col">
+            <label for="hematies" class="form-label">Hematíes:</label>
+            <input type="number" id="hematies" name="hematies" class="form-control" [(ngModel)]="hematologia.hematies">
+            <label class="form-label">Referencia: {{hematologia.hematies_ref?.min+ '-'+
+                hematologia.hematies_ref?.max}}</label>
+        </div>
+
+        <div class="col">
+            <label for="gBlancos" class="form-label">G. Blancos:</label>
+            <input type="number" id="gBlancos" name="gBlancos" class="form-control" [(ngModel)]="hematologia.gBlancos">
+            <label class="form-label">Referencia: {{hematologia.gBlancos_ref?.min+ '-'+
+                hematologia.gBlancos_ref?.max}}</label>
+        </div>
+
+        <div class="col">
+            <label for="neutrofilos" class="form-label">Neutrófilos:</label>
+            <input type="number" id="neutrofilos" name="neutrofilos" class="form-control"
+                [(ngModel)]="hematologia.neutrofilos">
+            <label class="form-label">Referencia: {{hematologia.neutrofilos_ref?.min+ '-'+
+                hematologia.neutrofilos_ref?.max}}</label>
+        </div>
+
+        <div class="col">
+            <label for="linfocitos" class="form-label">Linfocitos:</label>
+            <input type="number" id="linfocitos" name="linfocitos" class="form-control"
+                [(ngModel)]="hematologia.linfocitos">
+            <label class="form-label">Referencia: {{hematologia.linfocitos_ref?.min+ '-'+
+                hematologia.linfocitos_ref?.max}}</label>
+        </div>
+
+        <div class="col">
+            <label for="mid" class="form-label">MID:</label>
+            <input type="number" id="mid" name="mid" class="form-control" [(ngModel)]="hematologia.mid">
+            <label class="form-label">Referencia: {{hematologia.mid_ref?.min+ '-'+
+                hematologia.mid_ref?.max}}</label>
+        </div>
+
+        <div class="col">
+            <label for="mcv" class="form-label">MCV:</label>
+            <input type="number" id="mcv" name="mcv" class="form-control" [(ngModel)]="hematologia.mcv">
+            <label class="form-label">Referencia: {{hematologia.mcv_ref?.min+ '-'+
+                hematologia.mcv_ref?.max}}</label>
+        </div>
+
+        <div class="col">
+            <label for="mch" class="form-label">MCH:</label>
+            <input type="number" id="mch" name="mch" class="form-control" [(ngModel)]="hematologia.mch">
+            <label class="form-label">Referencia: {{hematologia.mch_ref?.min+ '-'+
+                hematologia.mch_ref?.max}}</label>
+        </div>
+
+        <div class="col">
+            <label for="mchc" class="form-label">MCHC:</label>
+            <input type="number" id="mchc" name="mchc" class="form-control" [(ngModel)]="hematologia.mchc">
+            <label class="form-label">Referencia: {{hematologia.mchc_ref?.min+ '-'+
+                hematologia.mchc_ref?.max}}</label>
+        </div>
+
+        <div class="col">
+            <label for="plaquetas" class="form-label">Plaquetas:</label>
+            <input type="number" id="plaquetas" name="plaquetas" class="form-control"
+                [(ngModel)]="hematologia.plaquetas">
+            <label class="form-label">Referencia: {{hematologia.plaquetas_ref?.min+ '-'+
+                hematologia.plaquetas_ref?.max}}</label>
+        </div>
+    </div>
+</form>
