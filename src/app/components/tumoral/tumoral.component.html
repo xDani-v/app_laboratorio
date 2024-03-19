@@ -1,0 +1,43 @@
+<form (ngSubmit)="getFormData()" class="p-5 bg-gray-100 rounded-lg shadow-md">
+    <div class="mt-4">
+        <h3 class="text-lg font-semibold mb-2">Examenes tumorales</h3>
+        <div class="grid grid-cols-6 gap-4">
+            <label class="ml-2 block text-sm font-medium text-gray-900"><input type="checkbox" class="mr-2"
+                    (change)="toggleInput(0, $event)">
+                AG. CARCINOEMBRIONARIO CEA</label>
+            <label class="ml-2 block text-sm font-medium text-gray-900"><input type="checkbox" class="mr-2"
+                    (change)="toggleInput(1, $event)">
+                CA 72-4</label>
+            <label class="ml-2 block text-sm font-medium text-gray-900"><input type="checkbox" class="mr-2"
+                    (change)="toggleInput(2, $event)">
+                CA 19-9</label>
+            <label class="ml-2 block text-sm font-medium text-gray-900"><input type="checkbox" class="mr-2"
+                    (change)="toggleInput(3, $event)"> C.
+                Alfafetoproteina</label>
+            <label class="ml-2 block text-sm font-medium text-gray-900"><input type="checkbox" class="mr-2"
+                    (change)="toggleInput(4, $event)"> C.
+                HCG Cuantificada</label>
+            <label class="ml-2 block text-sm font-medium text-gray-900"><input type="checkbox" class="mr-2"
+                    (change)="toggleInput(5, $event)">
+                PSA Total</label>
+            <label class="ml-2 block text-sm font-medium text-gray-900"><input type="checkbox" class="mr-2"
+                    (change)="toggleInput(6, $event)">
+                PSA Libre</label>
+            <label class="ml-2 block text-sm font-medium text-gray-900"><input type="checkbox" class="mr-2"
+                    (change)="toggleInput(7, $event)">
+                PSA Libre %</label>
+        </div>
+    </div>
+    <div class="flex flex-wrap  pt-5">
+        <div *ngFor="let procedimiento of procedimientos; let i = index">
+            <div *ngIf="showInput[procedimiento.propiedad]" class="flex-col items-center">
+                <label for="{{procedimiento.propiedad}}"
+                    class="block mb-1 text-sm font-medium text-gray-700">{{procedimiento.propiedad}}</label>
+                <input type="number" id="{{procedimiento.propiedad}}" name="{{procedimiento.propiedad}}"
+                    class="form-control border rounded-md py-2 px-3 w-full" [(ngModel)]="procedimiento.resultado">
+                <label class="block mt-1 text-sm text-gray-700">Referencia: {{procedimiento.referencia.min
+                    +"-"+procedimiento.referencia.max}}</label>
+            </div>
+        </div>
+    </div>
+</form>

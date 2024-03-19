@@ -1,0 +1,32 @@
+<form class="p-5 bg-gray-100 rounded-lg shadow-md">
+    <h6 class="text-xl font-semibold mb-4">Examenes Hormonales</h6>
+    <div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+                <label for="prolactina" class="block mb-1 text-sm font-medium text-gray-700">Prolactina:</label>
+                <input id="prolactina" class="form-control border rounded-md py-2 px-3 w-full"
+                    [(ngModel)]="prolactina.result" [ngModelOptions]="{standalone: true}">
+                <label class="block mt-1 text-sm text-gray-700">Referencia: {{prolactina.reference.min +" - "
+                    +prolactina.reference.max +" "+prolactina.unit}}</label>
+            </div>
+            <div>
+                <label for="tipo" class="block mb-1 text-sm font-medium text-gray-700">Tipo:</label>
+                <select id="tipo" name="tipo" [(ngModel)]="Tipo" (change)="updateReferenceValues()"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    [ngModelOptions]="{standalone: true}">
+                    <option value="" disabled selected>Seleccione sexo</option>
+                    <option value="Hombres">Hombres</option>
+                    <option value="Fase Folicular">Fase Folicular</option>
+                    <option value="Pre-Ovulación">Pre-Ovulación</option>
+                    <option value="Fase Lútea">Fase Lútea</option>
+                    <option value="Post- Menopausia">Post- Menopausia</option>
+                </select>
+                <label for="estradiol" class="block mb-1 text-sm font-medium text-gray-700">17-Beta- Estradiol</label>
+                <input id="estradiol" class="form-control border rounded-md py-2 px-3 w-full"
+                    [(ngModel)]="Estradiol.result" [ngModelOptions]="{standalone: true}">
+                <label class="block mt-1 text-sm text-gray-700">Referencia: {{Estradiol.reference.min +" - "
+                    +Estradiol.reference.max +" "+Estradiol.unit}}</label>
+            </div>
+        </div>
+    </div>
+</form>

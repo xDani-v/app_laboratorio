@@ -1,0 +1,170 @@
+<form (ngSubmit)="getFormData()" class="p-5 bg-gray-100 rounded-lg shadow-md">
+    <div class="mt-4">
+        <h3 class="text-lg font-semibold mb-2">Química Sanguínea</h3>
+        <div class="grid grid-cols-6 gap-4">
+            <label class="ml-2 block text-sm font-medium text-gray-900"><input type="checkbox" class="mr-2"
+                    (change)="toggleInput(0, $event)">
+                Glucosa</label>
+            <label class="ml-2 block text-sm font-medium text-gray-900"><input type="checkbox" class="mr-2"
+                    (change)="toggleInput(1, $event)">
+                Colesterol</label>
+            <label class="ml-2 block text-sm font-medium text-gray-900"><input type="checkbox" class="mr-2"
+                    (change)="toggleInput(2, $event)">
+                Triglicéridos</label>
+            <label class="ml-2 block text-sm font-medium text-gray-900"><input type="checkbox" class="mr-2"
+                    (change)="toggleInput(3, $event)"> C.
+                HDL</label>
+            <label class="ml-2 block text-sm font-medium text-gray-900"><input type="checkbox" class="mr-2"
+                    (change)="toggleInput(4, $event)"> C.
+                LDL</label>
+            <label class="ml-2 block text-sm font-medium text-gray-900"><input type="checkbox" class="mr-2"
+                    (change)="toggleInput(5, $event)">
+                Urea</label>
+            <label class="ml-2 block text-sm font-medium text-gray-900"><input type="checkbox" class="mr-2"
+                    (change)="toggleInput(6, $event)">
+                Creatinina M</label>
+            <label class="ml-2 block text-sm font-medium text-gray-900"><input type="checkbox" class="mr-2"
+                    (change)="toggleInput(7, $event)">
+                Creatinina H</label>
+            <label class="ml-2 block text-sm font-medium text-gray-900"><input type="checkbox" class="mr-2"
+                    (change)="toggleInput(8, $event)"> Ácido
+                úrico</label>
+            <label class="ml-2 block text-sm font-medium text-gray-900"><input type="checkbox" class="mr-2"
+                    (change)="toggleInput(9, $event)"> Proteínas
+                totales</label>
+            <label class="ml-2 block text-sm font-medium text-gray-900"><input type="checkbox" class="mr-2"
+                    (change)="toggleInput(10, $event)">
+                Albuminas</label>
+            <label class="ml-2 block text-sm font-medium text-gray-900"><input type="checkbox" class="mr-2"
+                    (change)="toggleInput(11, $event)">
+                Globulinas</label>
+            <label class="ml-2 block text-sm font-medium text-gray-900"><input type="checkbox" class="mr-2"
+                    (change)="toggleInput(12, $event)"> Lípidos
+                totales</label>
+            <label class="ml-2 block text-sm font-medium text-gray-900"><input type="checkbox" class="mr-2"
+                    (change)="toggleInput(13, $event)">
+                Bilirrubinas totales</label>
+            <label class="ml-2 block text-sm font-medium text-gray-900"><input type="checkbox" class="mr-2"
+                    (change)="toggleInput(14, $event)">
+                Bilirrubinas directas</label>
+            <label class="ml-2 block text-sm font-medium text-gray-900"><input type="checkbox" class="mr-2"
+                    (change)="toggleInput(15, $event)">
+                Bilirrubinas indirectas</label>
+            <label class="ml-2 block text-sm font-medium text-gray-900"><input type="checkbox" class="mr-2"
+                    (change)="toggleInput(16, $event)"> Nitrógeno
+                ureico</label>
+            <label class="ml-2 block text-sm font-medium text-gray-900"><input type="checkbox" class="mr-2"
+                    (change)="toggleInput(17, $event)"> Hemoglobina
+                glicosilada</label>
+        </div>
+    </div>
+    <div class="mt-4">
+        <h3 class="text-lg font-semibold mb-2">Enzimas</h3>
+        <div class="grid grid-cols-6 gap-4">
+            <label class="ml-2 block text-sm font-medium text-gray-900"><input type="checkbox" class="mr-2"
+                    (change)="toggleInputEnz(0, $event)">
+                TRANSAMINASA Ox H</label>
+            <label class="ml-2 block text-sm font-medium text-gray-900"><input type="checkbox" class="mr-2"
+                    (change)="toggleInputEnz(1, $event)">
+                TRANSAMINASA PI H</label>
+            <label class="ml-2 block text-sm font-medium text-gray-900"><input type="checkbox" class="mr-2"
+                    (change)="toggleInputEnz(2, $event)">
+                TRANSAMINASA Ox M</label>
+            <label class="ml-2 block text-sm font-medium text-gray-900"><input type="checkbox" class="mr-2"
+                    (change)="toggleInputEnz(3, $event)">
+                TRANSAMINASA PI M</label>
+            <label class="ml-2 block text-sm font-medium text-gray-900"><input type="checkbox" class="mr-2"
+                    (change)="toggleInputEnz(4, $event)">
+                Fosfatasa alcalina H</label>
+            <label class="ml-2 block text-sm font-medium text-gray-900"><input type="checkbox" class="mr-2"
+                    (change)="toggleInputEnz(5, $event)">
+                Fosfatasa alcalina M</label>
+            <label class="ml-2 block text-sm font-medium text-gray-900"><input type="checkbox" class="mr-2"
+                    (change)="toggleInputEnz(6, $event)">
+                Fosfatasa AC. Total</label>
+            <label class="ml-2 block text-sm font-medium text-gray-900"><input type="checkbox" class="mr-2"
+                    (change)="toggleInputEnz(7, $event)">
+                Fosfatasa AC. Prostática</label>
+            <label class="ml-2 block text-sm font-medium text-gray-900"><input type="checkbox" class="mr-2"
+                    (change)="toggleInputEnz(8, $event)">
+                Gamma G.T.</label>
+            <label class="ml-2 block text-sm font-medium text-gray-900"><input type="checkbox" class="mr-2"
+                    (change)="toggleInputEnz(9, $event)">
+                Lipasa</label>
+            <label class="ml-2 block text-sm font-medium text-gray-900"><input type="checkbox" class="mr-2"
+                    (change)="toggleInputEnz(10, $event)">
+                Amilasa</label>
+            <label class="ml-2 block text-sm font-medium text-gray-900"><input type="checkbox" class="mr-2"
+                    (change)="toggleInputEnz(11, $event)">
+                C.P.K.</label>
+            <label class="ml-2 block text-sm font-medium text-gray-900"><input type="checkbox" class="mr-2"
+                    (change)="toggleInputEnz(12, $event)">
+                C.K.Mb.</label>
+        </div>
+    </div>
+    <div class="mt-4">
+        <h3 class="text-lg font-semibold mb-2">Electrolitos</h3>
+        <div class="grid grid-cols-6 gap-4">
+            <label class="ml-2 block text-sm font-medium text-gray-900"><input type="checkbox" class="mr-2"
+                    (change)="toggleInputElec(0, $event)">
+                Sodio</label>
+            <label class="ml-2 block text-sm font-medium text-gray-900"><input type="checkbox" class="mr-2"
+                    (change)="toggleInputElec(1, $event)">
+                Potasio</label>
+            <label class="ml-2 block text-sm font-medium text-gray-900"><input type="checkbox" class="mr-2"
+                    (change)="toggleInputElec(2, $event)">
+                Calcio</label>
+            <label class="ml-2 block text-sm font-medium text-gray-900"><input type="checkbox" class="mr-2"
+                    (change)="toggleInputElec(3, $event)">
+                Cloro</label>
+            <label class="ml-2 block text-sm font-medium text-gray-900"><input type="checkbox" class="mr-2"
+                    (change)="toggleInputElec(4, $event)">
+                Fósforo Niño</label>
+            <label class="ml-2 block text-sm font-medium text-gray-900"><input type="checkbox" class="mr-2"
+                    (change)="toggleInputElec(5, $event)">
+                Fósforo Adulto</label>
+            <label class="ml-2 block text-sm font-medium text-gray-900"><input type="checkbox" class="mr-2"
+                    (change)="toggleInputElec(6, $event)">
+                Magnesio</label>
+        </div>
+    </div>
+    <div class="flex flex-wrap  pt-5">
+        <div *ngFor="let procedimiento of procedimientos; let i = index">
+            <div *ngIf="showInput[procedimiento.propiedad]" class="flex-col items-center">
+                <label for="{{procedimiento.propiedad}}"
+                    class="block mb-1 text-sm font-medium text-gray-700">{{procedimiento.propiedad}}</label>
+                <input type="number" id="{{procedimiento.propiedad}}" name="{{procedimiento.propiedad}}"
+                    class="form-control border rounded-md py-2 px-3 w-full" [(ngModel)]="procedimiento.resultado">
+                <label class="block mt-1 text-sm text-gray-700">Referencia: {{procedimiento.referencia.min
+                    +"-"+procedimiento.referencia.max}}</label>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="flex flex-wrap  pt-5">
+            <div *ngFor="let enzima of enzimas; let i = index">
+                <div *ngIf="showInput[enzima.propiedad]" class="flex-col items-center">
+                    <label for="{{enzima.propiedad}}"
+                        class="block mb-1 text-sm font-medium text-gray-700">{{enzima.propiedad}}</label>
+                    <input type="number" id="{{enzima.propiedad}}" name="{{enzima.propiedad}}"
+                        class="form-control border rounded-md py-2 px-3 w-full" [(ngModel)]="enzima.resultado">
+                    <label class="block mt-1 text-sm text-gray-700">Referencia: {{enzima.referencia.min
+                        +"-"+enzima.referencia.max}}</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="flex flex-wrap  pt-5">
+        <div *ngFor="let electrolito of electrolitos; let i = index">
+            <div *ngIf="showInput[electrolito.propiedad]" class="flex-col items-center">
+                <label for="{{electrolito.propiedad}}"
+                    class="block mb-1 text-sm font-medium text-gray-700">{{electrolito.propiedad}}</label>
+                <input type="number" id="{{electrolito.propiedad}}" name="{{electrolito.propiedad}}"
+                    class="form-control border rounded-md py-2 px-3 w-full" [(ngModel)]="electrolito.resultado">
+                <label class="block mt-1 text-sm text-gray-700">Referencia: {{electrolito.referencia.min
+                    +"-"+electrolito.referencia.max}}</label>
+            </div>
+        </div>
+    </div>
+    <button type="submit">enviar</button>
+</form>

@@ -1,66 +1,74 @@
 <form (ngSubmit)="submitForm()" class="p-5">
-  <div class="form-group row">
-    <div class="col">
-      <label for="nombre" class="form-label">Nombre:</label>
-      <input type="text" id="nombre" name="nombre" [(ngModel)]="nombre" required class="form-control">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div>
+      <label for="nombre" class="block mb-2 text-sm font-medium text-gray-900">Nombre:</label>
+      <input type="text" id="nombre" name="nombre" [(ngModel)]="nombre" required
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+        placeholder="Nombre">
+      <label for="fecha" class="block mt-4 mb-2 text-sm font-medium text-gray-900">Fecha:</label>
+      <input type="date" id="fecha" name="fecha" [(ngModel)]="fecha" required
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
     </div>
 
-    <div class="col">
-      <label for="fecha" class="form-label">Fecha:</label>
-      <input type="date" id="fecha" name="fecha" [(ngModel)]="fecha" required class="form-control">
+    <div>
+      <label for="edad" class="block mb-2 text-sm font-medium text-gray-900">Edad:</label>
+      <input type="number" id="edad" name="edad" [(ngModel)]="edad" required
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+      <label for="doctor" class="block mt-4 mb-2 text-sm font-medium text-gray-900">Doctor:</label>
+      <input type="text" id="doctor" name="doctor" [(ngModel)]="doctor" required
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
     </div>
-
-    <div class="col">
-      <label for="edad" class="form-label">Edad:</label>
-      <input type="number" id="edad" name="edad" [(ngModel)]="edad" required class="form-control">
-    </div>
-
-    <div class="col">
-      <label for="sexo" class="form-label">Sexo:</label>
-      <select id="sexo" name="sexo" [(ngModel)]="sexo" class="form-control">
-        <option value="Hombre adulto">Hombre adulto</option>
-        <option value="Mujer adulta">Mujer adulta</option>
-        <option value="Hombre Preescolar">Hombre Preescolar</option>
-        <option value="Mujer Preescolar">Mujer Preescolar</option>
-      </select>
-    </div>
-
-    <div class="col">
-      <label for="doctor" class="form-label">Doctor:</label>
-      <input type="text" id="doctor" name="doctor" [(ngModel)]="doctor" required class="form-control">
-    </div>
-  </div>
-
-  <div class="form-group row">
-    <div class="col">
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="hemograma" name="hemograma" [(ngModel)]="hematologiaActivo">
-        <label class="form-check-label" for="hemograma">
-          Hematologia
-        </label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="orina" name="orina" [(ngModel)]="orina">
-        <label class="form-check-label" for="orina">
-          Orina
-        </label>
-      </div>
-    </div>
-
 
   </div>
 
-  <div *ngIf="hematologiaActivo" class="form-group">
-    <app-hematologia *ngIf="hematologiaActivo" sexo="{{sexo}}"></app-hematologia>
+  <div class="grid grid-cols-4">
+    <div class="flex items-center ">
+      <input class="form-checkbox" type="checkbox" id="hemograma" name="hemograma" [(ngModel)]="hematologiaActivo">
+      <label class="ml-2 block text-sm font-medium text-gray-900" for="hemograma">Hematologia</label>
+    </div>
+    <div class="flex items-center ">
+      <input class="form-checkbox" type="checkbox" id="hormonal" name="hormonal" [(ngModel)]="hormonalActivo">
+      <label class="ml-2 block text-sm font-medium text-gray-900" for="hormonal">Hormonal</label>
+    </div>
+    <div class="flex items-center ">
+      <input class="form-checkbox" type="checkbox" id="inmunologia" name="inmunologia" [(ngModel)]="inmunologiaActivo">
+      <label class="ml-2 block text-sm font-medium text-gray-900" for="inmunologia">Inmunologia</label>
+    </div>
+    <div class="flex items-center ">
+      <input class="form-checkbox" type="checkbox" id="quimica" name="quimica" [(ngModel)]="QuimicaActivo">
+      <label class="ml-2 block text-sm font-medium text-gray-900" for="quimica">Quimica Sanguinea</label>
+    </div>
+    <div class="flex items-center ">
+      <input class="form-checkbox" type="checkbox" id="marcador" name="marcador" [(ngModel)]="MarcadorActivo">
+      <label class="ml-2 block text-sm font-medium text-gray-900" for="marcador">Marcadores tumorales</label>
+    </div>
+    <div class="flex items-center ">
+      <input class="form-checkbox" type="checkbox" id="orina" name="orina" [(ngModel)]="OrinaActivo">
+      <label class="ml-2 block text-sm font-medium text-gray-900" for="orina">Orina</label>
+    </div>
+    <div class="flex items-center ">
+      <input class="form-checkbox" type="checkbox" id="heces" name="heces" [(ngModel)]="HecesActivo">
+      <label class="ml-2 block text-sm font-medium text-gray-900" for="heces">Heces</label>
+    </div>
   </div>
 
-  <div *ngIf="orina" class="form-group">
-    <!-- Formulario de Orina -->
-    <label for="campo1" class="form-label">Campo 1 de la Orina:</label>
-    <input type="text" id="campo1" name="campo1" class="form-control">
-    <!-- Añade más campos del formulario de orina aquí si es necesario -->
+  <div *ngIf="hematologiaActivo" class="mt-6">
+    <app-hematologia *ngIf="hematologiaActivo"></app-hematologia>
   </div>
-  <div class="col pt-2">
-    <button type="submit" class="btn btn-primary">Enviar</button>
+
+  <div *ngIf="hormonalActivo" class="mt-6">
+    <app-hormonal></app-hormonal>
+  </div>
+
+  <div *ngIf="QuimicaActivo" class="mt-6">
+    <app-sanguinea></app-sanguinea>
+  </div>
+
+  <div *ngIf="MarcadorActivo" class="mt-6">
+    <app-tumoral></app-tumoral>
+  </div>
+
+  <div class="mt-6">
+    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Enviar</button>
   </div>
 </form>
