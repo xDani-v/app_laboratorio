@@ -1,1 +1,86 @@
-<p>orina works!</p>
+<form (ngSubmit)="getFormData()" class="p-5 bg-gray-100 rounded-lg shadow-md">
+    <div class="mt-4">
+        <h2 class="text-lg font-semibold mb-2">Procedimientos Orina</h2>
+        <div class="grid grid-cols-6 gap-4">
+            <label class="ml-2 block text-sm font-medium text-gray-900">
+                <input type="checkbox" class="mr-2" [(ngModel)]="examenOrina" [ngModelOptions]="{standalone: true}">
+                Examen de Orina
+            </label>
+            <label class="ml-2 block text-sm font-medium text-gray-900">
+                <input type="checkbox" class="mr-2" [(ngModel)]="examentoxicologico"
+                    [ngModelOptions]="{standalone: true}">
+                Examen Toxicologico
+            </label>
+            <label class="ml-2 block text-sm font-medium text-gray-900">
+                <input type="checkbox" class="mr-2" [(ngModel)]="examenMICROALBUMINURIA"
+                    [ngModelOptions]="{standalone: true}">
+                MICROALBUMINURIA
+            </label>
+        </div>
+    </div>
+
+    <div *ngIf="examenOrina">
+        <h2 class="text-lg font-semibold mb-2">Químico</h2>
+        <div class="flex flex-wrap pt-5">
+            <div *ngFor="let examen of quimico" class="flex-col items-center">
+                <label for="{{examen.propiedad}}" class="block mb-1 text-sm font-medium text-gray-700">
+                    {{examen.propiedad}}
+                </label>
+                <input type="text" id="{{examen.propiedad}}" name="{{examen.propiedad}}"
+                    class="form-control border rounded-md py-2 px-3 w-full" [(ngModel)]="examen.resultado"
+                    [ngModelOptions]="{standalone: true}">
+            </div>
+        </div>
+        <h2 class="text-lg font-semibold mb-2">Microscópico</h2>
+        <div class="flex flex-wrap pt-5">
+            <div *ngFor="let examen of microscopico" class="flex-col items-center">
+                <label for="{{examen.propiedad}}" class="block mb-1 text-sm font-medium text-gray-700">
+                    {{examen.propiedad}}
+                </label>
+                <input type="text" id="{{examen.propiedad}}" name="{{examen.propiedad}}"
+                    class="form-control border rounded-md py-2 px-3 w-full" [(ngModel)]="examen.resultado"
+                    [ngModelOptions]="{standalone: true}">
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="examentoxicologico">
+
+        <div class="p-5 bg-gray-300 rounded-lg shadow-md">
+            <h3>Seleccione</h3>
+            <div *ngFor="let examen of toxicologico; let i = index">
+                <label class="ml-2 block text-sm font-medium text-gray-900">
+                    <input type="checkbox" class="mr-2" (change)="toggleInputToxicologico(i, $event)">
+                    {{examen.propiedad}}
+                </label>
+            </div>
+
+            <div class="flex flex-wrap  pt-5">
+                <div *ngFor="let procedimiento of toxicologico; let i = index">
+                    <div *ngIf="showInput[procedimiento.propiedad]" class="flex-col items-center">
+                        <label for="{{procedimiento.propiedad}}"
+                            class="block mb-1 text-sm font-medium text-gray-700">{{procedimiento.propiedad}}</label>
+                        <select id="{{procedimiento.propiedad}}" name="{{procedimiento.propiedad}}"
+                            class="form-control border rounded-md py-2 px-3 w-full"
+                            [(ngModel)]="procedimiento.resultado">
+                            <option value="Positivo">Positivo</option>
+                            <option value="Negativo">Negativo</option>
+                        </select>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="examenMICROALBUMINURIA">
+        <div class="flex-col items-center">
+            <label for="microalbuminuria" class="block mb-1 text-sm font-medium text-gray-700">Microalbuminuria</label>
+            <input type="number" id="microalbuminuria" name="microalbuminuria"
+                class="form-control border rounded-md py-2 px-3 w-1/2" [(ngModel)]="microalbuminuria.resultado">
+            <label class="block mt-1 text-sm text-gray-700">Referencia: {{microalbuminuria.referencia.min
+                +"-"+microalbuminuria.referencia.max}}</label>
+        </div>
+    </div>
+
+</form>

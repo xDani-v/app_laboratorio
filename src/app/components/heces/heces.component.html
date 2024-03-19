@@ -1,0 +1,78 @@
+<form (ngSubmit)="getFormData()" class="p-5 bg-gray-100 rounded-lg shadow-md">
+    <div class="mt-4">
+        <h2 class="text-lg font-semibold mb-2">Procedimientos Heces</h2>
+        <div class="grid grid-cols-6 gap-4">
+            <label class="ml-2 block text-sm font-medium text-gray-900">
+                <input type="checkbox" class="mr-2" [(ngModel)]="helicobacter" [ngModelOptions]="{standalone: true}">
+                HELICOBACTER PYLORI
+            </label>
+            <label class="ml-2 block text-sm font-medium text-gray-900">
+                <input type="checkbox" class="mr-2" [(ngModel)]="examenHeces" [ngModelOptions]="{standalone: true}">
+                EXAMEN DE HECES
+            </label>
+            <label class="ml-2 block text-sm font-medium text-gray-900">
+                <input type="checkbox" class="mr-2" [(ngModel)]="examenCoproparasitario"
+                    [ngModelOptions]="{standalone: true}">
+                COPROPARASITARIO
+            </label>
+        </div>
+    </div>
+
+    <div *ngIf="helicobacter">
+        <div class="flex-col items-center">
+            <label for="helicobacterpiloty" class="block mb-1 text-sm font-medium text-gray-700">DETERMINACIÓN
+                CUALITATIVA DE HELICOBACTER PYLORI EN HECES</label>
+            <select id="helicobacterpiloty" name="helicobacterpiloty"
+                class="form-control border rounded-md py-2 px-3 w-40" [(ngModel)]="helicobacterpiloty.resultado">
+                <option value="Positivo">Positivo</option>
+                <option value="Negativo">Negativo</option>
+            </select>
+        </div>
+    </div>
+
+    <div *ngIf="examenHeces">
+        <div class="flex flex-wrap  pt-5">
+            <div class="flex-col items-center" *ngFor="let examen of Heces">
+                <label for="{{examen.propiedad}}"
+                    class="block mb-1 text-sm font-medium text-gray-700">{{examen.propiedad}}</label>
+                <input type="text" id="{{examen.propiedad}}" name="{{examen.propiedad}}"
+                    class="form-control border rounded-md py-2 px-3 w-50 pl-3" [(ngModel)]="examen.resultado">
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="examenCoproparasitario">
+        <p>Manten aplastado Ctrl para varias selecciones</p>
+        <div class="flex flex-wrap  pt-5">
+            <div class="flex-col items-center">
+                <label for="trofozoito" class="block mb-1 text-sm font-medium text-gray-700">TROFOZOITO</label>
+                <select id="trofozoito" name="trofozoito" multiple class="form-control border rounded-md py-2 px-3 w-50"
+                    [(ngModel)]="selectedTrofozoito">
+                    <option *ngFor="let item of trofozoitoItems" [value]="item">{{item}}</option>
+                </select>
+            </div>
+
+            <div class="flex-col items-center">
+                <label for="larvaHuevo" class="block mb-1 text-sm font-medium text-gray-700">LARVA HUEVO</label>
+                <select id="larvaHuevo" name="larvaHuevo" multiple class="form-control border rounded-md py-2 px-3 w-50"
+                    [(ngModel)]="selectedLarvaHuevo">
+                    <option *ngFor="let item of larvaHuevoItems" [value]="item">{{item}}</option>
+                </select>
+            </div>
+        </div>
+
+        <div *ngIf="selectedTrofozoito.length > 0">
+            <h2 class="text-lg font-medium text-gray-700">TROFOZOITO seleccionado:</h2>
+            <ul>
+                <li *ngFor="let item of selectedTrofozoito">{{item}}</li>
+            </ul>
+        </div>
+
+        <div *ngIf="selectedLarvaHuevo.length > 0">
+            <h2 class="text-lg font-medium text-gray-700">LARVA HUEVO seleccionado:</h2>
+            <ul>
+                <li *ngFor="let item of selectedLarvaHuevo">{{item}}</li>
+            </ul>
+        </div>
+    </div>
+</form>

@@ -14,11 +14,14 @@ import { HematologiaComponent } from './components/hematologia/hematologia.compo
 import { HormonalComponent } from './components/hormonal/hormonal.component';
 import { SanguineaComponent } from './components/sanguinea/sanguinea.component';
 import { TumoralComponent } from './components/tumoral/tumoral.component';
+import { OrinaComponent } from './components/orina/orina.component';
+import { HecesComponent } from './components/heces/heces.component';
+
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FormsModule, CommonModule, HematologiaComponent, HormonalComponent, SanguineaComponent, TumoralComponent],
+  imports: [RouterOutlet, FormsModule, CommonModule, HematologiaComponent, HormonalComponent, SanguineaComponent, TumoralComponent, OrinaComponent, HecesComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -39,7 +42,8 @@ export class AppComponent {
   @ViewChild(HematologiaComponent) HematologiaComponent!: HematologiaComponent;
   @ViewChild(HormonalComponent) HormonalComponent!: HormonalComponent;
   @ViewChild(TumoralComponent) TumoralComponent!: TumoralComponent;
-
+  @ViewChild(OrinaComponent) OrinaComponent!: OrinaComponent;
+  @ViewChild(HecesComponent) HecesComponent!: HecesComponent;
 
 
   submitForm() {

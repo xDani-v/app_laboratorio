@@ -68,6 +68,15 @@
     <app-tumoral></app-tumoral>
   </div>
 
+  <div *ngIf="OrinaActivo" class="mt-6">
+    <app-orina></app-orina>
+  </div>
+
+  <div *ngIf="HecesActivo" class="mt-6">
+    <app-heces></app-heces>
+  </div>
+
+
   <div class="mt-6">
     <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Enviar</button>
   </div>
