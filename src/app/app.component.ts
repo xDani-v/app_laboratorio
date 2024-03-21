@@ -16,12 +16,13 @@ import { SanguineaComponent } from './components/sanguinea/sanguinea.component';
 import { TumoralComponent } from './components/tumoral/tumoral.component';
 import { OrinaComponent } from './components/orina/orina.component';
 import { HecesComponent } from './components/heces/heces.component';
+import { InmunologiaComponent } from './components/inmunologia/inmunologia.component';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FormsModule, CommonModule, HematologiaComponent, HormonalComponent, SanguineaComponent, TumoralComponent, OrinaComponent, HecesComponent],
+  imports: [RouterOutlet, FormsModule, CommonModule, HematologiaComponent, HormonalComponent, SanguineaComponent, TumoralComponent, OrinaComponent, HecesComponent, InmunologiaComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -39,12 +40,14 @@ export class AppComponent {
   OrinaActivo: boolean = false;
   HecesActivo: boolean = false;
 
+
+
   @ViewChild(HematologiaComponent) HematologiaComponent!: HematologiaComponent;
   @ViewChild(HormonalComponent) HormonalComponent!: HormonalComponent;
   @ViewChild(TumoralComponent) TumoralComponent!: TumoralComponent;
   @ViewChild(OrinaComponent) OrinaComponent!: OrinaComponent;
   @ViewChild(HecesComponent) HecesComponent!: HecesComponent;
-
+  @ViewChild(InmunologiaComponent) InmunologiaComponent!: InmunologiaComponent;
 
   submitForm() {
 

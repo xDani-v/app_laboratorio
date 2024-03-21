@@ -15,6 +15,20 @@
                     [ngModelOptions]="{standalone: true}">
                 COPROPARASITARIO
             </label>
+            <label class="ml-2 block text-sm font-medium text-gray-900">
+                <input type="checkbox" class="mr-2" [(ngModel)]="examenRotavirusHeces"
+                    [ngModelOptions]="{standalone: true}">
+                DETERMINACION DE ROTAVIRUS
+            </label>
+            <label class="ml-2 block text-sm font-medium text-gray-900">
+                <input type="checkbox" class="mr-2" [(ngModel)]="examenEDA" [ngModelOptions]="{standalone: true}">
+                POSIEXAMEN COPROLOGICO/ EDA
+            </label>
+            <label class="ml-2 block text-sm font-medium text-gray-900">
+                <input type="checkbox" class="mr-2" [(ngModel)]="examenPiloryHeces"
+                    [ngModelOptions]="{standalone: true}">
+                HELICOBACTER PYLORI EN HECES
+            </label>
         </div>
     </div>
 
@@ -73,6 +87,46 @@
             <ul>
                 <li *ngFor="let item of selectedLarvaHuevo">{{item}}</li>
             </ul>
+        </div>
+    </div>
+
+    <div *ngIf="examenRotavirusHeces">
+        <div class="flex flex-wrap pt-5">
+            <div class="flex-col items-center">
+                <label for="rotavirusHeces"
+                    class="block mb-1 text-sm font-medium text-gray-700">{{rotavirusHeces.propiedad}}</label>
+                <select id="rotavirusHeces" name="rotavirusHeces"
+                    class="form-control border rounded-md py-2 px-3 w-50 pl-3" [(ngModel)]="rotavirusHeces.resultado">
+                    <option value="Positivo">Positivo</option>
+                    <option value="Negativo">Negativo</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="examenEDA">
+        <div class="flex flex-wrap pt-5">
+            <div class="flex-col items-center" *ngFor="let examen of edas">
+                <label for="{{examen.propiedad}}"
+                    class="block mb-1 text-sm font-medium text-gray-700">{{examen.propiedad}}</label>
+                <input type="text" id="{{examen.propiedad}}" name="{{examen.propiedad}}"
+                    class="form-control border rounded-md py-2 px-3 w-50 pl-3" [(ngModel)]="examen.resultado">
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="examenPiloryHeces">
+        <div class="flex flex-wrap pt-5">
+            <div class="flex-col items-center">
+                <label for="propiedad"
+                    class="block mb-1 text-sm font-medium text-gray-700">{{helicobacterPylori.propiedad}}</label>
+                <input type="text" id="propiedad" name="propiedad"
+                    class="form-control border rounded-md py-2 px-3 w-50 pl-3"
+                    [(ngModel)]="helicobacterPylori.resultado">
+                <p class="text-sm text-gray-700 mt-2">Referencia: {{helicobacterPylori.referencia.min}} -
+                    {{helicobacterPylori.referencia.max}} +{{helicobacterPylori.unidad}}</p>
+
+            </div>
         </div>
     </div>
 </form>

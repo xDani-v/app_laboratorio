@@ -1,0 +1,182 @@
+<form (ngSubmit)="getFormData()" class="p-5 bg-gray-100 rounded-lg shadow-md">
+    <div class="mt-4">
+        <div class="grid grid-cols-6 gap-4">
+            <label class="ml-2 block text-sm font-medium text-gray-900">
+                <input type="checkbox" class="mr-2" [(ngModel)]="inmunologia_check"
+                    [ngModelOptions]="{standalone: true}">
+                Inmunología
+            </label>
+            <label class="ml-2 block text-sm font-medium text-gray-900">
+                <input type="checkbox" class="mr-2" [(ngModel)]="electrolitos_check"
+                    [ngModelOptions]="{standalone: true}">
+                Electrolitos
+            </label>
+            <label class="ml-2 block text-sm font-medium text-gray-900">
+                <input type="checkbox" class="mr-2" [(ngModel)]="reaccionWidal_check"
+                    [ngModelOptions]="{standalone: true}">
+                Reacción de Widal
+            </label>
+            <label class="ml-2 block text-sm font-medium text-gray-900">
+                <input type="checkbox" class="mr-2" [(ngModel)]="hemostasia_check"
+                    [ngModelOptions]="{standalone: true}">
+                Hemostasia
+            </label>
+            <label class="ml-2 block text-sm font-medium text-gray-900">
+                <input type="checkbox" class="mr-2" [(ngModel)]="invitro_check" [ngModelOptions]="{standalone: true}">
+                Determinación Semicuantitativa Inmunológica In-Vitro de la Microalbuminuria
+            </label>
+        </div>
+    </div>
+
+    <div *ngIf="inmunologia_check">
+        <div class="flex flex-wrap pt-5">
+            <div class="flex-col items-center">
+                <label for="tuberculosisSerica"
+                    class="block mb-1 text-sm font-medium text-gray-700">{{tuberculosisSerica.propiedad}}</label>
+                <input type="text" id="tuberculosisSerica" name="tuberculosisSerica"
+                    class="form-control border rounded-md py-2 px-3 w-50 pl-3"
+                    [(ngModel)]="tuberculosisSerica.resultado">
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="electrolitos_check">
+        <div class="grid grid-cols-6 gap-4 bg-gray-50">
+            <label class="ml-2 block text-sm font-medium text-gray-900">
+                <input type="checkbox" class="mr-2" (change)="toggleInputElectro(0, $event)">
+                Sodio
+            </label>
+            <label class="ml-2 block text-sm font-medium text-gray-900">
+                <input type="checkbox" class="mr-2" (change)="toggleInputElectro(1, $event)">
+                Potasio
+            </label>
+            <label class="ml-2 block text-sm font-medium text-gray-900">
+                <input type="checkbox" class="mr-2" (change)="toggleInputElectro(2, $event)">
+                Calcio
+            </label>
+            <label class="ml-2 block text-sm font-medium text-gray-900">
+                <input type="checkbox" class="mr-2" (change)="toggleInputElectro(3, $event)">
+                ASTO
+            </label>
+            <label class="ml-2 block text-sm font-medium text-gray-900">
+                <input type="checkbox" class="mr-2" (change)="toggleInputElectro(4, $event)">
+                PCR
+            </label>
+            <label class="ml-2 block text-sm font-medium text-gray-900">
+                <input type="checkbox" class="mr-2" (change)="toggleInputElectro(5, $event)">
+                FR
+            </label>
+        </div>
+        <div class="flex flex-wrap  pt-5">
+            <div *ngFor="let procedimiento of electrolitos; let i = index">
+                <div *ngIf="showInput[procedimiento.propiedad]" class="flex-col items-center">
+                    <label for="{{procedimiento.propiedad}}"
+                        class="block mb-1 text-sm font-medium text-gray-700">{{procedimiento.propiedad}}</label>
+                    <input type="number" id="{{procedimiento.propiedad}}" name="{{procedimiento.propiedad}}"
+                        class="form-control border rounded-md py-2 px-3 w-full" [(ngModel)]="procedimiento.resultado">
+                    <label class="block mt-1 text-sm text-gray-700">Referencia: {{procedimiento.referencia.min
+                        +"-"+procedimiento.referencia.max}}</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="reaccionWidal_check">
+        <div class="grid grid-cols-6 gap-4 bg-gray-50">
+
+            <label class="ml-2 block text-sm font-medium text-gray-900">
+                <input type="checkbox" class="mr-2" (change)="toggleInputWidal(0, $event)">
+                Salmonella O
+            </label>
+            <label class="ml-2 block text-sm font-medium text-gray-900">
+                <input type="checkbox" class="mr-2" (change)="toggleInputWidal(1, $event)">
+                Salmonella H
+            </label>
+            <label class="ml-2 block text-sm font-medium text-gray-900">
+                <input type="checkbox" class="mr-2" (change)="toggleInputWidal(2, $event)">
+                Paratífico A
+            </label>
+            <label class="ml-2 block text-sm font-medium text-gray-900">
+                <input type="checkbox" class="mr-2" (change)="toggleInputWidal(3, $event)">
+                Paratífico B
+            </label>
+            <label class="ml-2 block text-sm font-medium text-gray-900">
+                <input type="checkbox" class="mr-2" (change)="toggleInputWidal(4, $event)">
+                Proteux Ox-19
+            </label>
+            <label class="ml-2 block text-sm font-medium text-gray-900">
+                <input type="checkbox" class="mr-2" (change)="toggleInputWidal(5, $event)">
+                Brucella Abor
+            </label>
+            <label class="ml-2 block text-sm font-medium text-gray-900">
+                <input type="checkbox" class="mr-2" (change)="toggleInputWidal(6, $event)">
+                V.D.R.L
+            </label>
+            <label class="ml-2 block text-sm font-medium text-gray-900">
+                <input type="checkbox" class="mr-2" (change)="toggleInputWidal(7, $event)">
+                VIH
+            </label>
+            <label class="ml-2 block text-sm font-medium text-gray-900">
+                <input type="checkbox" class="mr-2" (change)="toggleInputWidal(8, $event)">
+                HIV
+            </label>
+        </div>
+        <div class="flex flex-wrap  pt-5">
+            <div *ngFor="let procedimiento of widal; let i = index">
+                <div *ngIf="showInput[procedimiento.propiedad]" class="flex-col items-center">
+                    <label for="{{procedimiento.propiedad}}"
+                        class="block mb-1 text-sm font-medium text-gray-700">{{procedimiento.propiedad}}</label>
+
+                    <ng-container *ngIf="procedimiento.propiedad === 'Proteux Ox-19'; else reactiveBlock">
+                        <input type="text" id="{{procedimiento.propiedad}}" name="{{procedimiento.propiedad}}"
+                            class="form-control border rounded-md py-2 px-3 w-full"
+                            [(ngModel)]="procedimiento.resultado">
+                    </ng-container>
+
+                    <ng-template #reactiveBlock>
+                        <ng-container
+                            *ngIf="procedimiento.propiedad === 'V.D.R.L' || procedimiento.propiedad === 'VIH' || procedimiento.propiedad === 'HIV'; else positiveBlock">
+                            <select id="{{procedimiento.propiedad}}" name="{{procedimiento.propiedad}}"
+                                class="form-control border rounded-md py-2 px-3 w-full"
+                                [(ngModel)]="procedimiento.resultado">
+                                <option value="Reactivo">Reactivo</option>
+                                <option value="No Reactivo">No Reactivo</option>
+                            </select>
+                        </ng-container>
+
+                        <ng-template #positiveBlock>
+                            <select id="{{procedimiento.propiedad}}" name="{{procedimiento.propiedad}}"
+                                class="form-control border rounded-md py-2 px-3 w-full"
+                                [(ngModel)]="procedimiento.resultado">
+                                <option value="Positivo">Positivo</option>
+                                <option value="Negativo">Negativo</option>
+                            </select>
+                        </ng-template>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="hemostasia_check">
+        <div class="flex flex-wrap  pt-5">
+            <div *ngFor="let examen of hemostasia" class="flex-col items-center">
+                <label for="{{examen.propiedad}}"
+                    class="block mb-1 text-sm font-medium text-gray-700">{{examen.propiedad}}</label>
+
+                <input type="text" id="{{examen.propiedad}}" name="{{examen.propiedad}}"
+                    class="form-control border rounded-md py-2 px-3 w-full" [(ngModel)]="examen.resultado">
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="invitro_check">
+        <div *ngFor="let examen of invitro" class="flex-col items-center">
+            <label for="{{examen.propiedad}}"
+                class="block mb-1 text-sm font-medium text-gray-700">{{examen.propiedad}}</label>
+
+            <input type="text" id="{{examen.propiedad}}" name="{{examen.propiedad}}"
+                class="form-control border rounded-md py-2 px-3 w-full" [(ngModel)]="examen.resultado">
+        </div>
+    </div>
+</form>
