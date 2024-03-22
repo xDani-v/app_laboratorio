@@ -68,21 +68,17 @@ export class AppComponent {
     var imgWidth = 200;
     var imgHeight = imgWidth * 476 / 2000;
     var y = 5;
-
-
+    var heightLeft = imgHeight;
+    var position = 10;
+    var pageHeight = 295;
     doc.addImage(imageBase64, 'PNG', 10, y, imgWidth, imgHeight);
     y += imgHeight + 5;
 
-
-
-    function checkPage(val1: number) {
-      var totaly = y + val1;
-      if (totaly >= doc.internal.pageSize.height) {
-        doc.addPage();
-        y = 5; // Restablece la posición vertical para la nueva página
-        doc.addImage(imageBase64, 'PNG', 10, y, imgWidth, imgHeight);
-        y = imgHeight + 5;
-      }
+    while (heightLeft >= 0) {
+      position += heightLeft - imgHeight; // top padding for other pages
+      doc.addPage();
+      doc.addImage(imageBase64, 'PNG', 10, position, imgWidth, imgHeight);
+      heightLeft -= pageHeight;
     }
 
     function centerText(text: string, y: number) {
@@ -128,15 +124,13 @@ export class AppComponent {
         },
         headStyles: { fillColor: [255, 255, 255] as [number, number, number], textColor: [0, 0, 0] as [number, number, number] },
       };
-      var aun = this.calculateValue(tableOptions.body.length);
-      var temp1 = y + tableOptions.body.length * 10 + aun;
-      checkPage(temp1);
+      var temp1 = y + tableOptions.body.length * 10 + this.calculateValue(procedimientosData.length);
       autoTable(doc, tableOptions);
       doc.setFont('helvetica');
       doc.text("MID: son las células como monocitos, eosinófilos, basófilos, reportados en un solo valor.", 15, temp1);
+
+      // Actualiza la posición vertical 'y' después de agregar el contenido.
       y = y + tableOptions.body.length * 10 + 15;
-
-
     }
 
     //examenes de inmunologia
@@ -165,8 +159,7 @@ export class AppComponent {
           },
           headStyles: { fillColor: [255, 255, 255] as [number, number, number], textColor: [0, 0, 0] as [number, number, number] }
         };
-        var temp1 = y + tableOptions.body.length * 10;
-        checkPage(temp1);
+
         autoTable(doc, tableOptions);
         y = y + tableOptions.body.length * 10 + 15;
 
@@ -196,8 +189,7 @@ export class AppComponent {
           },
           headStyles: { fillColor: [255, 255, 255] as [number, number, number], textColor: [0, 0, 0] as [number, number, number] },
         };
-        var temp1 = y + tableOptions.body.length * 10;
-        checkPage(temp1);
+
         autoTable(doc, tableOptions);
         y = y + tableOptions.body.length * 10 + 15;
 
@@ -222,8 +214,7 @@ export class AppComponent {
           },
           headStyles: { fillColor: [255, 255, 255] as [number, number, number], textColor: [0, 0, 0] as [number, number, number] }
         };
-        var temp1 = y + tableOptions.body.length * 10;
-        checkPage(temp1);
+
         autoTable(doc, tableOptions);
         y = y + tableOptions.body.length * 10 + 15;
 
@@ -248,8 +239,7 @@ export class AppComponent {
           },
           headStyles: { fillColor: [255, 255, 255] as [number, number, number], textColor: [0, 0, 0] as [number, number, number] }
         };
-        var temp1 = y + tableOptions.body.length * 10;
-        checkPage(temp1);
+
         autoTable(doc, tableOptions);
         y = y + tableOptions.body.length * 10 + 15;
 
@@ -274,8 +264,7 @@ export class AppComponent {
           },
           headStyles: { fillColor: [255, 255, 255] as [number, number, number], textColor: [0, 0, 0] as [number, number, number] }
         };
-        var temp1 = y + tableOptions.body.length * 10;
-        checkPage(temp1);
+
         autoTable(doc, tableOptions);
         y = y + tableOptions.body.length * 10 + 15;
 
