@@ -20,9 +20,9 @@ export class Procedimiento {
 
     calcularEstado() {
         if (this.resultado < this.referencia.min) {
-            this.estado = "↓";
+            this.estado = "Bajo";
         } else if (this.resultado > this.referencia.max) {
-            this.estado = "↑";
+            this.estado = "Elevado";
         } else {
             this.estado = "";
         }
