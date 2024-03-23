@@ -27,18 +27,22 @@ export class InmunologiaComponent {
     new Procedimiento("ASTO", 0, "UI/mL", 180, 200, "-"),
     new Procedimiento("PCR", 0, "mg/L", 24, 24, "-"),
     new Procedimiento("FR", 0, "UI/mL", 6, 8, "-"),
+    new Procedimiento("Cloro", 0, "mEq/L", 96, 103, "-"),
+    new Procedimiento("Fosforo Niños", 0, "mg%", 3, 7, "-"),
+    new Procedimiento("Fosforo Adultos", 0, "mg%", 2.7, 4.5, "-"),
+    new Procedimiento("Magnesio", 0, "mg%", 1.9, 2.5, "-"),
   ]
 
   widal: Examen[] = [
-    new Examen("Salmonella O", ""),
-    new Examen("Salmonella H", ""),
-    new Examen("Paratífico A", ""),
-    new Examen("Paratífico B", ""),
-    new Examen("Proteux Ox-19", ""),
-    new Examen("Brucella Abor", ""),
-    new Examen("V.D.R.L", ""),
-    new Examen("VIH", ""),
-    new Examen("HIV", "")
+    new Examen("Salmonella O", "", ""),
+    new Examen("Salmonella H", "", ""),
+    new Examen("Paratífico A", "", ""),
+    new Examen("Paratífico B", "", ""),
+    new Examen("Proteux Ox-19", "", ""),
+    new Examen("Brucella Abor", "", ""),
+    new Examen("V.D.R.L", "", ""),
+    new Examen("VIH", "", ""),
+    new Examen("HIV", "", "")
   ];
 
   hemostasia: Examen[] = [
@@ -95,6 +99,7 @@ export class InmunologiaComponent {
           {
             propiedad: examen.propiedad,
             resultado: examen.resultado,
+            observaciones: examen.observaciones
           })),
       hemostasia: this.hemostasia
         .map(examen => (

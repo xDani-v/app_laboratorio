@@ -1,4 +1,4 @@
-<form (ngSubmit)="getFormData()" class="p-5 bg-gray-100 rounded-lg shadow-md">
+<form class="p-5 bg-gray-100 rounded-lg shadow-md">
     <h6 class="text-xl font-semibold mb-4">Examen Hematologico</h6>
 
     <div class="w-60">
@@ -14,6 +14,12 @@
 
     <!-- /Selects -->
     <div class="grid grid-cols-6 gap-4">
+        <div>
+            <label class="block text-sm font-medium text-gray-900">
+                <input type="checkbox" class="mr-2" (change)="toggleAll($event)">
+                Seleccionar todos
+            </label>
+        </div>
         <label class="ml-2 block text-sm font-medium text-gray-900"><input type="checkbox" class="mr-2"
                 (change)="toggleInput(0, $event)">
             Hematocrito</label>
@@ -72,5 +78,5 @@
         </div>
     </div>
 
-    <button type="submit">enviardatos</button>
+
 </form>

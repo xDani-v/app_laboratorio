@@ -69,6 +69,22 @@
                 <input type="checkbox" class="mr-2" (change)="toggleInputElectro(5, $event)">
                 FR
             </label>
+            <label class="ml-2 block text-sm font-medium text-gray-900">
+                <input type="checkbox" class="mr-2" (change)="toggleInputElectro(6, $event)">
+                Cloro
+            </label>
+            <label class="ml-2 block text-sm font-medium text-gray-900">
+                <input type="checkbox" class="mr-2" (change)="toggleInputElectro(7, $event)">
+                Fosforo Niños
+            </label>
+            <label class="ml-2 block text-sm font-medium text-gray-900">
+                <input type="checkbox" class="mr-2" (change)="toggleInputElectro(8, $event)">
+                Fosforo Adultos
+            </label>
+            <label class="ml-2 block text-sm font-medium text-gray-900">
+                <input type="checkbox" class="mr-2" (change)="toggleInputElectro(9, $event)">
+                Magnesio
+            </label>
         </div>
         <div class="flex flex-wrap  pt-5">
             <div *ngFor="let procedimiento of electrolitos; let i = index">
@@ -131,9 +147,15 @@
                         class="block mb-1 text-sm font-medium text-gray-700">{{procedimiento.propiedad}}</label>
 
                     <ng-container *ngIf="procedimiento.propiedad === 'Proteux Ox-19'; else reactiveBlock">
-                        <input type="text" id="{{procedimiento.propiedad}}" name="{{procedimiento.propiedad}}"
+                        <select id="{{procedimiento.propiedad}}" name="{{procedimiento.propiedad}}"
                             class="form-control border rounded-md py-2 px-3 w-full"
                             [(ngModel)]="procedimiento.resultado">
+                            <option value="Positivo">Positivo</option>
+                            <option value="Negativo">Negativo</option>
+                        </select>
+                        <input *ngIf="procedimiento.resultado === 'Positivo'" type="text" placeholder="Agregar valor"
+                            class="form-control border rounded-md py-2 px-3 w-full mt-2"
+                            [(ngModel)]="procedimiento.observaciones" [ngModelOptions]="{standalone: true}">
                     </ng-container>
 
                     <ng-template #reactiveBlock>
@@ -145,6 +167,9 @@
                                 <option value="Reactivo">Reactivo</option>
                                 <option value="No Reactivo">No Reactivo</option>
                             </select>
+                            <input *ngIf="procedimiento.resultado === 'Reactivo'" type="text"
+                                placeholder="Agregar valor" class="form-control border rounded-md py-2 px-3 w-full mt-2"
+                                [(ngModel)]="procedimiento.observaciones" [ngModelOptions]="{standalone: true}">
                         </ng-container>
 
                         <ng-template #positiveBlock>
@@ -154,6 +179,9 @@
                                 <option value="Positivo">Positivo</option>
                                 <option value="Negativo">Negativo</option>
                             </select>
+                            <input *ngIf="procedimiento.resultado === 'Positivo'" type="text"
+                                placeholder="Agregar valor" class="form-control border rounded-md py-2 px-3 w-full mt-2"
+                                [(ngModel)]="procedimiento.observaciones" [ngModelOptions]="{standalone: true}">
                         </ng-template>
                     </ng-template>
                 </div>

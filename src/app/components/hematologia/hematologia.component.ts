@@ -21,15 +21,15 @@ export class HematologiaComponent {
       case 'Hombre adulto':
         this.procedimientos.push(new Procedimiento('Hematocrito', 0, '%', 45.0, 52.9, 'Normal'));
         this.procedimientos.push(new Procedimiento('Hemoglobina', 0, 'g/dL', 14.0, 17.4, 'Normal'));
-        this.procedimientos.push(new Procedimiento('Hematies', 0, '', 4500000, 5500000, 'Normal'));
-        this.procedimientos.push(new Procedimiento('Glóbulos Blancos', 0, '', 5000, 10000, 'Normal'));
+        this.procedimientos.push(new Procedimiento('Hematies', 0, 'M', 4500000, 5500000, 'Normal'));
+        this.procedimientos.push(new Procedimiento('Glóbulos Blancos', 0, 'µL', 5000, 10000, 'Normal'));
         this.procedimientos.push(new Procedimiento('Neutrófilos', 0, '%', 50.0, 75.0, 'Normal'));
         this.procedimientos.push(new Procedimiento('Linfocitos', 0, '%', 25.0, 40.0, 'Normal'));
         this.procedimientos.push(new Procedimiento('MID', 0, '%', 3.0, 7.0, 'Normal'));
         this.procedimientos.push(new Procedimiento('MCV', 0, 'fL', 84.0, 96.0, 'Normal'));
         this.procedimientos.push(new Procedimiento('MCH', 0, 'pg', 27.0, 32.0, 'Normal'));
         this.procedimientos.push(new Procedimiento('MCHC', 0, 'g/dL', 30.0, 35.0, 'Normal'));
-        this.procedimientos.push(new Procedimiento('Plaquetas', 0, '', 150000, 400000, 'Normal'));
+        this.procedimientos.push(new Procedimiento('Plaquetas', 0, 'µL', 150000, 400000, 'Normal'));
         break;
       case 'Mujer adulta':
         this.procedimientos.push(new Procedimiento('Hematocrito', 0, '%', 36.0, 48.0, 'Normal'));
@@ -62,16 +62,27 @@ export class HematologiaComponent {
 
   showInput: any = {};
 
+  toggleAll(event: any) {
+    if (!this.sexo) {
+      alert('Por favor, selecciona un sexo primero.');
+    } else {
+      let isChecked = event.target.checked;
+      for (let procedimiento of this.procedimientos) {
+        this.showInput[procedimiento.propiedad] = isChecked;
+      }
+    }
+  }
+
   toggleInput(index: number, event: any) {
     if (!this.sexo) {
       alert('Por favor, selecciona un sexo primero.');
-      return;
-    }
-
-    if (this.procedimientos[index]) {
-      this.showInput[this.procedimientos[index].propiedad] = event.target.checked;
     } else {
-      console.error('No existe un procedimiento con el índice ' + index);
+
+      if (this.procedimientos[index]) {
+        this.showInput[this.procedimientos[index].propiedad] = event.target.checked;
+      } else {
+        console.error('No existe un procedimiento con el índice ' + index);
+      }
     }
   }
 

@@ -134,7 +134,7 @@ export class AppComponent {
         headStyles: { fillColor: [255, 255, 255] as [number, number, number], textColor: [0, 0, 0] as [number, number, number] },
       };
       autoTable(doc, tableOptions);
-      y = y + tableOptions.body.length * 10 + 15;
+      y = y + tableOptions.body.length * 10 + 12;
     }
 
     function addExamenInfo(title: string, data: Examen[]) {
@@ -161,7 +161,38 @@ export class AppComponent {
         headStyles: { fillColor: [255, 255, 255] as [number, number, number], textColor: [0, 0, 0] as [number, number, number] }
       };
       autoTable(doc, tableOptions);
-      y = y + tableOptions.body.length * 10 + 15;
+      y = y + tableOptions.body.length * 10 + 12;
+    }
+
+    function addExamenObsInfo(title: string, data: Examen[]) {
+      const estimatedHeight = calculateEstimatedHeight(data);
+      if (y + estimatedHeight > pageHeight) {
+        doc.addPage();
+        y = 5; // Reinicia la posición Y en la nueva página
+        addImageToPage(10);
+      }
+      y += 2; // Ajustar la posición Y para dejar espacio para el texto
+      centerText(title, y);
+      doc.setFont('helvetica');
+      const tableOptions = {
+        head: [['Propiedad', 'Resultado', 'Valor']],
+        body: data.map(examen => [examen.propiedad, examen.resultado, examen.observaciones]),
+        startY: y + 5,
+        styles: {
+          fillColor: [255, 255, 255] as [number, number, number], textColor: [0, 0, 0] as [number, number, number], lineColor: [255, 255, 255] as [number, number, number]
+        },
+        columnStyles: {
+          0: { fillColor: [255, 255, 255] as [number, number, number] }, // Primera columna blanca
+          1: { fillColor: [255, 255, 255] as [number, number, number] }, // Segunda columna blanca
+          2: { fillColor: [255, 255, 255] as [number, number, number] },
+        },
+        headStyles: { fillColor: [255, 255, 255] as [number, number, number], textColor: [0, 0, 0] as [number, number, number] }
+      };
+      autoTable(doc, {
+        ...tableOptions,
+        body: tableOptions.body.map(row => row.map(cell => cell || '')) // Replace undefined values with empty string
+      });
+      y = y + tableOptions.body.length * 10 + 12;
     }
 
     function addHecesPrint(title: string, data: String[]) {
@@ -187,7 +218,7 @@ export class AppComponent {
         headStyles: { fillColor: [255, 255, 255] as [number, number, number], textColor: [0, 0, 0] as [number, number, number] }
       };
       autoTable(doc, tableOptions as any);
-      y = y + tableOptions.body.length * 10 + 15;
+      y = y + tableOptions.body.length * 10 + 12;
     }
 
 
@@ -237,7 +268,7 @@ export class AppComponent {
         addProcedimientoInfo('Electrolitos', electrolitosData);
       }
       if (this.InmunologiaComponent.reaccionWidal_check) {
-        addExamenInfo('Reaccion de Widal', this.InmunologiaComponent.getFormData().widal);
+        addExamenObsInfo('Reaccion de Widal', this.InmunologiaComponent.getFormData().widal);
       }
       if (this.InmunologiaComponent.hemostasia_check) {
         addExamenInfo('Hemostasia', this.InmunologiaComponent.getFormData().hemostasia);
@@ -331,14 +362,14 @@ export class AppComponent {
     if (this.OrinaActivo) {
       if (this.OrinaComponent.examenOrina) {
         if (this.OrinaComponent.getFormData().examenQuimico.length > 0) {
-          addExamenInfo('Examen de Orina', this.OrinaComponent.getFormData().examenQuimico);
+          addExamenInfo('Examen quimico de orina', this.OrinaComponent.getFormData().examenQuimico);
         }
         if (this.OrinaComponent.getFormData().examenMicroscopico.length > 0) {
-          addExamenInfo('Examen de Orina', this.OrinaComponent.getFormData().examenMicroscopico);
+          addExamenInfo('Examen microscopico de orina', this.OrinaComponent.getFormData().examenMicroscopico);
         }
       }
       if (this.OrinaComponent.examentoxicologico) {
-        addExamenInfo('Cultivo de Orina', this.OrinaComponent.getFormData().procedimientos);
+        addExamenInfo('Cultivo de orina', this.OrinaComponent.getFormData().procedimientos);
       }
       if (this.OrinaComponent.examenMICROALBUMINURIA) {
         const formData = this.OrinaComponent.getFormData();
@@ -364,7 +395,7 @@ export class AppComponent {
       }
 
       if (this.HecesComponent.examenEDA) {
-        addExamenInfo('Examen EDA', this.HecesComponent.getFormData().eda);
+        addExamenInfo('Examen-EDA', this.HecesComponent.getFormData().eda);
       }
       if (this.HecesComponent.examenPiloryHeces) {
         addProcedimientoInfo('Examen Pilory Heces', [{
