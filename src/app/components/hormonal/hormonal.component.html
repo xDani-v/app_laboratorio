@@ -5,13 +5,13 @@
             <div>
                 <label for="prolactina" class="block mb-1 text-sm font-medium text-gray-700">Prolactina:</label>
                 <input id="prolactina" class="form-control border rounded-md py-2 px-3 w-full"
-                    [(ngModel)]="prolactina.result" [ngModelOptions]="{standalone: true}">
-                <label class="block mt-1 text-sm text-gray-700">Referencia: {{prolactina.reference.min +" - "
-                    +prolactina.reference.max +" "+prolactina.unit}}</label>
+                    [(ngModel)]="prolactina.resultado" [ngModelOptions]="{standalone: true}">
+                <label class="block mt-1 text-sm text-gray-700">Referencia: {{prolactina.referencia.min +" - "
+                    +prolactina.referencia.max +" "+prolactina.unidad}}</label>
             </div>
             <div>
                 <label for="tipo" class="block mb-1 text-sm font-medium text-gray-700">Tipo:</label>
-                <select id="tipo" name="tipo" [(ngModel)]="Tipo" (change)="updateReferenceValues()"
+                <select id="tipo" name="tipo" [(ngModel)]="Tipo" (change)="updatereferenciaValues()"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                     [ngModelOptions]="{standalone: true}">
                     <option value="" disabled selected>Seleccione sexo</option>
@@ -23,9 +23,9 @@
                 </select>
                 <label for="estradiol" class="block mb-1 text-sm font-medium text-gray-700">17-Beta- Estradiol</label>
                 <input id="estradiol" class="form-control border rounded-md py-2 px-3 w-full"
-                    [(ngModel)]="Estradiol.result" [ngModelOptions]="{standalone: true}">
-                <label class="block mt-1 text-sm text-gray-700">Referencia: {{Estradiol.reference.min +" - "
-                    +Estradiol.reference.max +" "+Estradiol.unit}}</label>
+                    [(ngModel)]="Estradiol.resultado" [ngModelOptions]="{standalone: true}">
+                <label class="block mt-1 text-sm text-gray-700">Referencia: {{Estradiol.referencia.min +" - "
+                    +Estradiol.referencia.max +" "+Estradiol.unidad}}</label>
             </div>
         </div>
     </div>

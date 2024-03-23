@@ -120,15 +120,12 @@ export class SanguineaComponent {
           referencia: electrolito.referencia
         }));
 
-    // return {
-    //   procedimientos: procedimientosData,
-    //   enzimas: enzimasData,
-    //   electrolitos: electrolitosData
-    // };
-    console.log({
+    return {
       procedimientos: procedimientosData,
       enzimas: enzimasData,
       electrolitos: electrolitosData
-    });
+    };
+
+
   }
 }

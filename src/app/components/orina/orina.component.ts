@@ -92,7 +92,7 @@ export class OrinaComponent {
         }));
 
 
-    console.log({
+    return ({
       examenQuimico: examenQuimicoData,
       examenMicroscopico: examenMicroscopicoData,
       procedimientos: toxicologicoData,

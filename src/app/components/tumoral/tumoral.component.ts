@@ -45,7 +45,7 @@ export class TumoralComponent {
           estado: procedimiento.estado,
           referencia: procedimiento.referencia
         }));
-    console.log({
+    return ({
       procedimientos: procedimientosData,
     });
   }
