@@ -32,7 +32,12 @@ import { Examen } from './models/examen.model';
 export class AppComponent {
   title = 'app_laboratorio';
   nombre: string = '';
-  fecha: Date = new Date();
+  date = new Date();
+  day = ("0" + this.date.getDate()).slice(-2);
+  month = ("0" + (this.date.getMonth() + 1)).slice(-2);
+  year = this.date.getFullYear();
+
+  fecha = `${this.year}-${this.month}-${this.day}`;
   edad: number = 0;
   doctor: string = '';
   hematologiaActivo: boolean = false;
@@ -96,7 +101,8 @@ export class AppComponent {
     const addPatientInfo = () => {
       doc.setFontSize(11);
       doc.setFont('helvetica');
-      doc.text(`Nombre: ${this.nombre}`, 15, y);
+      let titulo = this.edad < 18 ? 'Jv.' : 'Sr./Sra.';
+      doc.text(`Nombre: ${titulo} ${this.nombre}`, 15, y);
       doc.text(`Edad: ${this.edad} Años`, 140, y);
       let fechaFormateada = new Date(this.fecha).toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
       y += 5;
@@ -134,7 +140,7 @@ export class AppComponent {
         headStyles: { fillColor: [255, 255, 255] as [number, number, number], textColor: [0, 0, 0] as [number, number, number] },
       };
       autoTable(doc, tableOptions);
-      y = y + tableOptions.body.length * 10 + 12;
+      y = y + tableOptions.body.length * 10 + 11;
     }
 
     function addExamenInfo(title: string, data: Examen[]) {
@@ -145,6 +151,7 @@ export class AppComponent {
         addImageToPage(10);
       }
       y += 2; // Ajustar la posición Y para dejar espacio para el texto
+      doc.setFont('helvetica', 'bold');
       centerText(title, y);
       doc.setFont('helvetica');
       const tableOptions = {
@@ -164,6 +171,46 @@ export class AppComponent {
       y = y + tableOptions.body.length * 10 + 12;
     }
 
+    function addExamenInfo2(title: string, data1: Examen[], data2: Examen[]) {
+      const estimatedHeight = calculateEstimatedHeight(data1);
+      if (y + estimatedHeight > pageHeight) {
+        doc.addPage();
+        y = 5; // Reinicia la posición Y en la nueva página
+        addImageToPage(10);
+      }
+      y += 2; // Ajustar la posición Y para dejar espacio para el texto
+      doc.setFont('helvetica', 'bold');
+      centerText(title, y);
+      doc.setFont('helvetica');
+      const tableOptions = {
+        head: [['Quimico', 'Valores', 'Microscopio', 'Valores']],
+        body: data1.map((examen, index) => [
+          examen.propiedad,
+          examen.resultado,
+          data2[index]?.propiedad || '',
+          data2[index]?.resultado || ''
+        ]),
+        startY: y + 5,
+        styles: {
+          fillColor: [255, 255, 255] as [number, number, number],
+          textColor: [0, 0, 0] as [number, number, number],
+          lineColor: [255, 255, 255] as [number, number, number]
+        },
+        columnStyles: {
+          0: { fillColor: [255, 255, 255] as [number, number, number] }, // Primera columna blanca
+          1: { fillColor: [255, 255, 255] as [number, number, number] }, // Segunda columna blanca
+          2: { fillColor: [255, 255, 255] as [number, number, number] }, // Tercera columna blanca
+          3: { fillColor: [255, 255, 255] as [number, number, number] }, // Cuarta columna blanca
+        },
+        headStyles: { fillColor: [255, 255, 255] as [number, number, number], textColor: [0, 0, 0] as [number, number, number] }
+      };
+      autoTable(doc, tableOptions);
+      y = y + tableOptions.body.length * 10 + 12;
+    }
+
+
+    //fin
+
     function addExamenObsInfo(title: string, data: Examen[]) {
       const estimatedHeight = calculateEstimatedHeight(data);
       if (y + estimatedHeight > pageHeight) {
@@ -172,6 +219,7 @@ export class AppComponent {
         addImageToPage(10);
       }
       y += 2; // Ajustar la posición Y para dejar espacio para el texto
+      doc.setFont('helvetica', 'bold');
       centerText(title, y);
       doc.setFont('helvetica');
       const tableOptions = {
@@ -195,25 +243,49 @@ export class AppComponent {
       y = y + tableOptions.body.length * 10 + 12;
     }
 
-    function addHecesPrint(title: string, data: String[]) {
-      const estimatedHeight = calculateEstimatedHeight(data);
+    function addHecesPrint(title: string, data1: String[], data2: String[]) {
+      const estimatedHeight = calculateEstimatedHeight((data1.length > (data2.length || 0) ? data1 : data2));
       if (y + estimatedHeight > pageHeight) {
         doc.addPage();
         y = 5; // Reinicia la posición Y en la nueva página
         addImageToPage(10);
       }
       y += 2; // Ajustar la posición Y para dejar espacio para el texto
+      doc.setFont('helvetica', 'bold');
       centerText(title, y);
       doc.setFont('helvetica');
+
+      let head = [];
+      let bodyData: any = [];
+
+      if (data1.length > 0) {
+        head.push('Trofozoito');
+        bodyData = data1.map((item, index) => [item, data2 && data2.length > 0 ? data2[index] || '' : undefined]);
+      }
+
+      if (data2 && data2.length > 0) {
+        if (head.length === 0) {
+          head.push('LarvaHuevo');
+          bodyData = data2.map(item => [item]);
+        } else {
+          head.push('LarvaHuevo');
+        }
+      }
+
+
+
       const tableOptions = {
-        head: [['Valores encontrados']],
-        body: data.map(item => [item]),
+        head: [head],
+        body: bodyData,
         startY: y + 5,
         styles: {
-          fillColor: [255, 255, 255] as [number, number, number], textColor: [0, 0, 0] as [number, number, number], lineColor: [255, 255, 255] as [number, number, number]
+          fillColor: [255, 255, 255] as [number, number, number],
+          textColor: [0, 0, 0] as [number, number, number],
+          lineColor: [255, 255, 255] as [number, number, number]
         },
         columnStyles: {
           0: { fillColor: [255, 255, 255] as [number, number, number] }, // Primera columna blanca
+          1: { fillColor: [255, 255, 255] as [number, number, number] }, // Segunda columna blanca
         },
         headStyles: { fillColor: [255, 255, 255] as [number, number, number], textColor: [0, 0, 0] as [number, number, number] }
       };
@@ -361,11 +433,15 @@ export class AppComponent {
     //Orina
     if (this.OrinaActivo) {
       if (this.OrinaComponent.examenOrina) {
-        if (this.OrinaComponent.getFormData().examenQuimico.length > 0) {
-          addExamenInfo('Examen quimico de orina', this.OrinaComponent.getFormData().examenQuimico);
-        }
-        if (this.OrinaComponent.getFormData().examenMicroscopico.length > 0) {
-          addExamenInfo('Examen microscopico de orina', this.OrinaComponent.getFormData().examenMicroscopico);
+        if (this.OrinaComponent.getFormData().examenQuimico.length > 0 && this.OrinaComponent.getFormData().examenMicroscopico.length > 0) {
+          addExamenInfo2('Examen de orina', this.OrinaComponent.getFormData().examenQuimico, this.OrinaComponent.getFormData().examenMicroscopico);
+        } else {
+          if (this.OrinaComponent.getFormData().examenQuimico.length > 0) {
+            addExamenInfo('Examen quimico de orina', this.OrinaComponent.getFormData().examenQuimico);
+          }
+          if (this.OrinaComponent.getFormData().examenMicroscopico.length > 0) {
+            addExamenInfo('Examen microscopico de orina', this.OrinaComponent.getFormData().examenMicroscopico);
+          }
         }
       }
       if (this.OrinaComponent.examentoxicologico) {
@@ -387,8 +463,8 @@ export class AppComponent {
         addExamenInfo('Examen de Heces', this.HecesComponent.getFormData().Heces);
       }
       if (this.HecesComponent.examenCoproparasitario) {
-        addHecesPrint('Trofozoito', this.HecesComponent.getFormData().selectedTrofozoito);
-        addHecesPrint('LarvaHuevo', this.HecesComponent.getFormData().selectedLarvaHuevo);
+        addHecesPrint('Coproparasitario', this.HecesComponent.getFormData().selectedTrofozoito, this.HecesComponent.getFormData().selectedLarvaHuevo);
+
       }
       if (this.HecesComponent.examenRotavirusHeces) {
         addExamenInfo('Examen Rotavirus Heces', [this.HecesComponent.getFormData().rotavirusHeces]);
@@ -413,8 +489,12 @@ export class AppComponent {
         }]); // Wrap the object inside an array
       }
     }
+
+    let nombreSinEspacios = this.nombre.replace(/\s/g, '');
+    let nombreArchivo = `${nombreSinEspacios}_${this.day}_${this.month}.pdf`;
+    doc.save(nombreArchivo);
     // Guarda el PDF
-    doc.save('doc.pdf');
+
   }
 
 

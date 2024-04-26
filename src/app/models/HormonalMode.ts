@@ -19,7 +19,7 @@ export class HormonalModel {
         } else if (this.result > this.reference.max) {
             this.estado = '↑';
         } else {
-            this.estado = '';
+            this.estado = '-';
         }
     }
 }

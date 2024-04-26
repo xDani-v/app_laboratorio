@@ -24,7 +24,7 @@ export class Procedimiento {
         } else if (this.resultado > this.referencia.max) {
             this.estado = "Elevado";
         } else {
-            this.estado = "";
+            this.estado = "-";
         }
     }
 

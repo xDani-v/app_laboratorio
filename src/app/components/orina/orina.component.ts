@@ -36,6 +36,7 @@ export class OrinaComponent {
   microscopico: Examen[] = [
     new Examen('Células epit', ''),
     new Examen('Hematíes', ''),
+    new Examen('Leucocitos', ''),
     new Examen('Piocitos', ''),
     new Examen('Bacterias', ''),
     new Examen('Bacilos', ''),
